@@ -1,6 +1,6 @@
-# flutter_application_1
+# Chatter
 
-A new Flutter project.
+A Chatter app made for school
 
 ## Getting Started
 
