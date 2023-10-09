@@ -33,7 +33,12 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
-  supabase_flutter: ^1.10.22
+  supabase_flutter: ^1.8.1
+  timeago: ^3.1.0
+  flutter_appauth: ^6.0.2
+  crypto: ^3.0.3
+  supabase_auth_ui: ^0.2.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
