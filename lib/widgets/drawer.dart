@@ -7,8 +7,8 @@ class NavDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: const <Widget>[
-          DrawerHeader(
+        children: <Widget>[
+          const DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.greenAccent,
             ),
@@ -22,14 +22,16 @@ class NavDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
+            onTap: () => Navigator.of(context).pushNamed('/home'),
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
+            leading: const Icon(Icons.person),
+            title: const Text('Settings'),
+            onTap: () => Navigator.of(context).pushNamed('/account'),
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(Icons.info),
             title: Text('About'),
           ),

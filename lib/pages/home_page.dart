@@ -1,9 +1,9 @@
-import 'package:chatter_application/pages/chats_page.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:chatter_application/widgets/chats_widget.dart';
 import 'package:chatter_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
-// import 'package:supabase_flutter/supabase_flutter.dart';
-
+@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
   //add a hamburger slider
@@ -17,9 +17,6 @@ class _HomePageState extends State<HomePage> {
   void _newChat() {
     //log debug to console
     debugPrint('Creating a new chat');
-    setState(() {
-      // _counter++;
-    });
   }
 
   @override
@@ -30,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Chats"),
       ),
       drawer: const NavDrawer(),
-      body: const ChatsPage(),
+      body: const ChatsWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: _newChat,
         tooltip: 'New chat',

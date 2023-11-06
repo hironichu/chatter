@@ -1,15 +1,16 @@
+import 'package:chatter_application/pages/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class ChatsPage extends StatefulWidget {
-  const ChatsPage({super.key});
+class ChatsWidget extends StatefulWidget {
+  const ChatsWidget({super.key});
 
   @override
-  State<ChatsPage> createState() => _ChatsPageState();
+  State<ChatsWidget> createState() => _ChatsPageState();
 }
 
-class _ChatsPageState extends State<ChatsPage> {
+class _ChatsPageState extends State<ChatsWidget> {
   final _instance = Supabase.instance;
 
   @override
@@ -51,8 +52,11 @@ class _ChatsPageState extends State<ChatsPage> {
                           color: Colors.greenAccent)),
                   subtitle: Text(timestampToDateTime),
                   onTap: () {
-                    Navigator.pushNamed(context, '/chat',
-                        arguments: {'conv_id': item.id});
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ChatPage(convId: item['id'])));
                   },
                 );
               },

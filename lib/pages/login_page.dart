@@ -1,21 +1,25 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:chatter_application/main.dart';
+import 'package:flutter/foundation.dart';
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
-
+@RoutePage()
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final void Function(AuthState isLoggedIn)? onLoginResult;
+  final bool showBackButton;
+  const LoginPage({Key? key, this.onLoginResult, this.showBackButton = true})
+      : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
-  bool _redirecting = false;
+
   late final TextEditingController _emailController = TextEditingController();
   late final StreamSubscription<AuthState> _authStateSubscription;
 
@@ -59,15 +63,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) {
-      if (_redirecting) return;
-      final session = data.session;
-      if (session != null) {
-        _redirecting = true;
-        Navigator.of(context).pushReplacementNamed('/home');
-      }
-    });
-    super.initState();
+    _authStateSubscription =
+        supabase.auth.onAuthStateChange.listen(super.widget.onLoginResult);
+    super.initState();  
   }
 
   @override
@@ -80,7 +78,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign In')),
+      appBar: AppBar(
+        title: const Text('Sign In'),
+        backgroundColor: Colors.blueAccent,
+      ),
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
         children: [

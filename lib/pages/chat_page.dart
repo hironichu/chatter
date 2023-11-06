@@ -1,9 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/message.dart';
 
+@RoutePage()
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+  final int convId;
+  const ChatPage({required this.convId, super.key});
 
   @override
   State<ChatPage> createState() => _ChatPageState();

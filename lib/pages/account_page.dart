@@ -1,12 +1,15 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:chatter_application/model/profil_model.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:chatter_application/main.dart';
 
+@RoutePage()
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
 
   @override
-  _AccountPageState createState() => _AccountPageState();
+  State<AccountPage> createState() => _AccountPageState();
 }
 
 class _AccountPageState extends State<AccountPage> {
@@ -25,20 +28,19 @@ class _AccountPageState extends State<AccountPage> {
       final userId = supabase.auth.currentUser!.id;
       final data = await supabase
           .from('profiles')
-          .select<Map<String, dynamic>>()
+          .select<ProfileModel>()
           .eq('id', userId)
           .single();
-      _usernameController.text = (data['username'] ?? '') as String;
-      _websiteController.text = (data['website'] ?? '') as String;
+      _usernameController.text = (data.username) as String;
     } on PostgrestException catch (error) {
       SnackBar(
         content: Text(error.message),
-        backgroundColor: Theme.of(context).colorScheme.error,
+        backgroundColor: Colors.redAccent,
       );
     } catch (error) {
-      SnackBar(
-        content: const Text('Unexpected error occurred'),
-        backgroundColor: Theme.of(context).colorScheme.error,
+      const SnackBar(
+        content: Text('Unexpected error occurred'),
+        backgroundColor: Colors.redAccent,
       );
     } finally {
       if (mounted) {
@@ -139,6 +141,7 @@ class _AccountPageState extends State<AccountPage> {
                   onPressed: _loading ? null : _updateProfile,
                   child: Text(_loading ? 'Saving...' : 'Update'),
                 ),
+          
                 const SizedBox(height: 18),
                 TextButton(onPressed: _signOut, child: const Text('Sign Out')),
               ],
