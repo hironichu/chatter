@@ -53,6 +53,7 @@ class _AccountPageState extends State<AccountPage> {
 
   /// Called when user taps `Update` button
   Future<void> _updateProfile() async {
+    final colorScheme = Theme.of(context).colorScheme;
     setState(() {
       _loading = true;
     });
@@ -73,12 +74,12 @@ class _AccountPageState extends State<AccountPage> {
     } on PostgrestException catch (error) {
       SnackBar(
         content: Text(error.message),
-        backgroundColor: Theme.of(context).colorScheme.error,
+        backgroundColor: colorScheme.error,
       );
     } catch (error) {
       SnackBar(
         content: const Text('Unexpected error occurred'),
-        backgroundColor: Theme.of(context).colorScheme.error,
+        backgroundColor: colorScheme.error,
       );
     } finally {
       if (mounted) {
@@ -90,17 +91,18 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Future<void> _signOut() async {
+    final colorScheme = Theme.of(context).colorScheme;
     try {
       await supabase.auth.signOut();
     } on AuthException catch (error) {
       SnackBar(
         content: Text(error.message),
-        backgroundColor: Theme.of(context).colorScheme.error,
+        backgroundColor: colorScheme.error,
       );
     } catch (error) {
       SnackBar(
         content: const Text('Unexpected error occurred'),
-        backgroundColor: Theme.of(context).colorScheme.error,
+        backgroundColor: colorScheme.error,
       );
     } finally {
       if (mounted) {

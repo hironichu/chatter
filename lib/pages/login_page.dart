@@ -10,10 +10,12 @@ import 'dart:async';
 class LoginPage extends StatefulWidget {
   final void Function(AuthState isLoggedIn)? onLoginResult;
   final bool showBackButton;
-  const LoginPage({super.key, this.onLoginResult, this.showBackButton = true});
+  const LoginPage({required super.key, this.onLoginResult, this.showBackButton = true});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
+  
+  // const LoginPage({ required this.context });
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -23,6 +25,8 @@ class _LoginPageState extends State<LoginPage> {
   late final StreamSubscription<AuthState> _authStateSubscription;
 
   Future<void> _signIn() async {
+    if (!context.mounted) return;
+    final colorScheme = Theme.of(context).colorScheme;
     try {
       setState(() {
         _isLoading = true;
@@ -44,12 +48,12 @@ class _LoginPageState extends State<LoginPage> {
     } on AuthException catch (error) {
       SnackBar(
         content: Text(error.message),
-        backgroundColor: Theme.of(context).colorScheme.error,
+        backgroundColor: colorScheme.error,
       );
     } catch (error) {
       SnackBar(
         content: const Text('Unexpected error occurred'),
-        backgroundColor: Theme.of(context).colorScheme.error,
+        backgroundColor: colorScheme.error,
       );
     } finally {
       if (mounted) {

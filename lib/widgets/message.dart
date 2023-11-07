@@ -4,8 +4,7 @@ class Message extends StatelessWidget {
   final String text;
   final bool isMe;
 
-  const Message({Key? key, required this.text, required this.isMe})
-      : super(key: key);
+  const Message({super.key, required this.text, required this.isMe});
 
   @override
   Widget build(BuildContext context) {
