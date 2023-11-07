@@ -10,8 +10,7 @@ import 'dart:async';
 class LoginPage extends StatefulWidget {
   final void Function(AuthState isLoggedIn)? onLoginResult;
   final bool showBackButton;
-  const LoginPage({Key? key, this.onLoginResult, this.showBackButton = true})
-      : super(key: key);
+  const LoginPage({super.key, this.onLoginResult, this.showBackButton = true});
 
   @override
   State<LoginPage> createState() => _LoginPageState();

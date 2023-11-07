@@ -9,23 +9,22 @@ var isAuthenticated = supabase.auth.currentUser != null;
 
 class AuthGuard extends AutoRouteGuard {
   @override
-  void onNavigation(NavigationResolver resolver, StackRouter router) {
-    if (!isAuthenticated) {
-      // ignore: unawaited_futures
-      router.push(
+  Future<void> onNavigation(NavigationResolver resolver, StackRouter router) async {
+    //log debug
+    if (isAuthenticated) {
+      resolver.resolveNext(true);
+    } else {
+      resolver.redirect(
         LoginRoute(onLoginResult: (session) {
+          // resolver.resolveNext(didLogin, reevaluateNext: false);
           if (session.event == AuthChangeEvent.signedIn) {
             isAuthenticated = true;
-            router.markUrlStateForReplace();
-            router.removeLast();
-            resolver.next();
+            resolver.resolveNext(isAuthenticated, reevaluateNext: false);
           } else {
-            resolver.next(false);
+            resolver.resolveNext(false, reevaluateNext: true);
           }
         }),
       );
-    } else {
-      resolver.next(true);
     }
   }
 }
