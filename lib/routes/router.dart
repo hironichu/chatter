@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:chatter_application/routes/auth_guard.dart';
-
 import 'package:chatter_application/routes/router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Page,Route')
@@ -10,11 +9,13 @@ class RootRouter extends $RootRouter {
         AutoRoute(
           page: HomeRoute.page,
           initial: true,
-          path: '',
+          path: '/',
+          guards: [AuthGuard()],
           children: [
-            RedirectRoute(path: '', redirectTo: 'home'),
             AutoRoute(
-                page: AccountRoute.page, path: 'login', guards: [AuthGuard()]),
+                page: AccountRoute.page,
+                path: 'account',
+                guards: [AuthGuard()]),
             AutoRoute(
               page: ChatRoute.page,
               path: ':id',
@@ -23,6 +24,7 @@ class RootRouter extends $RootRouter {
               },
             ),
           ],
-        )
+        ),
+        AutoRoute(path: '/login', page: LoginRoute.page)
       ];
 }

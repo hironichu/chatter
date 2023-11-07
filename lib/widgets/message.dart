@@ -4,8 +4,7 @@ class Message extends StatelessWidget {
   final String text;
   final bool isMe;
 
-  const Message({Key? key, required this.text, required this.isMe})
-      : super(key: key);
+  const Message({super.key, required this.text, required this.isMe});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +17,10 @@ class Message extends StatelessWidget {
             borderRadius: BorderRadius.only(
               topLeft: const Radius.circular(12),
               topRight: const Radius.circular(12),
-              bottomLeft: isMe ? const Radius.circular(12) : const Radius.circular(0),
-              bottomRight: isMe ? const Radius.circular(0) : const Radius.circular(12),
+              bottomLeft:
+                  isMe ? const Radius.circular(12) : const Radius.circular(0),
+              bottomRight:
+                  isMe ? const Radius.circular(0) : const Radius.circular(12),
             ),
           ),
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
