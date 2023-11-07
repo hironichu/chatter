@@ -141,7 +141,6 @@ class _AccountPageState extends State<AccountPage> {
                   onPressed: _loading ? null : _updateProfile,
                   child: Text(_loading ? 'Saving...' : 'Update'),
                 ),
-          
                 const SizedBox(height: 18),
                 TextButton(onPressed: _signOut, child: const Text('Sign Out')),
               ],

@@ -13,7 +13,9 @@ class RootRouter extends $RootRouter {
           guards: [AuthGuard()],
           children: [
             AutoRoute(
-                page: AccountRoute.page, path: 'account', guards: [AuthGuard()]),
+                page: AccountRoute.page,
+                path: 'account',
+                guards: [AuthGuard()]),
             AutoRoute(
               page: ChatRoute.page,
               path: ':id',
@@ -23,6 +25,6 @@ class RootRouter extends $RootRouter {
             ),
           ],
         ),
-        AutoRoute(path: '/login', page: LoginRoute.page)     
+        AutoRoute(path: '/login', page: LoginRoute.page)
       ];
 }

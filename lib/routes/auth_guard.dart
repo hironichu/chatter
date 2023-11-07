@@ -9,7 +9,8 @@ var isAuthenticated = supabase.auth.currentUser != null;
 
 class AuthGuard extends AutoRouteGuard {
   @override
-  Future<void> onNavigation(NavigationResolver resolver, StackRouter router) async {
+  Future<void> onNavigation(
+      NavigationResolver resolver, StackRouter router) async {
     //log debug
     if (isAuthenticated) {
       resolver.resolveNext(true);
